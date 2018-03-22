@@ -209,7 +209,7 @@ void jWriteTest()
 	//
 	// Example JSON object
 	//
-	jwOpen(&jwc, buffer, buflen, JW_OBJECT, 1);
+	jwOpen(&jwc, buffer, buflen, JW_OBJECT, JW_PRETTY);
 
 	jwObj_string(&jwc, "key", "value");
 	jwObj_int(&jwc, "int", 1);
@@ -252,7 +252,7 @@ void jWriteTest()
 
 	printf("\n\nA JSON array example:\n\n");
 
-	jwOpen(&jwc, buffer, buflen, JW_ARRAY, 1);
+	jwOpen(&jwc, buffer, buflen, JW_ARRAY, JW_PRETTY);
 	jwArr_string(&jwc, "String value");
 	jwArr_int(&jwc, 1234);
 	jwArr_double(&jwc, 567.89012);
@@ -276,14 +276,14 @@ void jWriteTest()
 		printf("Error: %s at function call %d\n", jwErrorToString(err), jwErrorPos(&jwc));
 
 	printf("\n\nExample error:\n\n");
-	jwOpen(&jwc, buffer, buflen, JW_ARRAY, 1); // 1
-	jwArr_string(&jwc, "String value");		   // 2
-	jwArr_int(&jwc, 1234);					   // 3
-	jwArr_double(&jwc, 567.89012);			   // 4
-	jwArr_bool(&jwc, 1);					   // 5
-	jwArr_null(&jwc);						   // 6
-	jwArr_object(&jwc);						   // 7
-											   // empty object
+	jwOpen(&jwc, buffer, buflen, JW_ARRAY, JW_PRETTY);	// 1
+	jwArr_string(&jwc, "String value");		   			// 2
+	jwArr_int(&jwc, 1234);					  			// 3
+	jwArr_double(&jwc, 567.89012);					  	// 4
+	jwArr_bool(&jwc, 1);					 			// 5
+	jwArr_null(&jwc);						   			// 6
+	jwArr_object(&jwc);						   			// 7
+											   			// empty object
 	//jwEnd( &jwc );
 	jwArr_object(&jwc);					  // 8  <-- this is where the error is
 	jwObj_string(&jwc, "key", "value");   // 9
