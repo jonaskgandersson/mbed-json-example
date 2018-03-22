@@ -31,7 +31,7 @@ int main()
 {
 	printf(CLEAR_CONSOLE);
 	printf(" +------------------------------------------------------------------+ \r\n");
-	printf(" |  %-64s| \r\n", "Mbed json example using jWrite and jRead");
+	printf(" |  %-64s| \r\n", "Mbed json example using jWrite and jRead.");
 	printf(" |  Mbed-OS version: %d.%d.%-43d| \r\n", MBED_MAJOR_VERSION, MBED_MINOR_VERSION, MBED_PATCH_VERSION);
 	printf(" +------------------------------------------------------------------+ \r\n");
 	printf(" |  %-64s| \r\n", "Write some json using jWrite");
@@ -64,6 +64,12 @@ int main()
 	printf("\r\n");
 
 	runExamples();
+
+	printf("\r\n");
+	printf(" +------------------------------------------------------------------+ \r\n");
+	printf(" |  %-64s| \r\n", "DONE!");
+	printf(" +------------------------------------------------------------------+ \r\n");
+	printf("\r\n");
 
 	return 0;
 }
@@ -327,7 +333,7 @@ void runExamples()
 	struct jReadElement arrayElement;
 
 	const char *exampleJson =
-		"{"
+		"{\n"
 		"  \"astring\": \"This is a string\",\n"
 		"  \"number1\": 42,\n"
 		"  \"number2\":  -123.45,\n"
@@ -340,7 +346,7 @@ void runExamples()
 		"  \"no\":  false\n"
 		"}\n";
 
-	printf( "Example json: %s\r\n\n", exampleJson);
+	printf( "Example json:\r\n %s\r\n", exampleJson);
 
 	testQuery(exampleJson, "");
 	testQuery(exampleJson, "[1");
@@ -422,17 +428,17 @@ void articleExample()
 	struct jReadElement element;
 	int i;
 	const char *pJson =
-		"{"
-		"\"Company\": \"The Most Excellent Example Company\","
-		"\"Address\": \"Planet Earth\","
-		"\"Numbers\":["
-		"{ \"Name\":\"Fred\",   \"Ident\":12345 },"
-		"{ \"Name\":\"Jim\",    \"Ident\":\"87654\" },"
-		"{ \"Name\":\"Zaphod\", \"Ident\":\"0777621\" }"
-		"]"
-		"}";
+		"{\n"
+		"  \"Company\": \"The Most Excellent Example Company\",\n"
+		"  \"Address\": \"Planet Earth\",\n"
+		"  \"Numbers\":[\n"
+		"    { \"Name\":\"Fred\",   \"Ident\":12345 },\n"
+		"    { \"Name\":\"Jim\",    \"Ident\":\"87654\" },\n"
+		"    { \"Name\":\"Zaphod\", \"Ident\":\"0777621\" }\n"
+		"  ]\n"
+		"}\n";
 
-	printf("Example Json to parse: \r\n %s\r\n", pJson);
+	printf("Example Json to parse: \r\n%s\r\n", pJson);
 	
 	printf("\r\n");
 	printf("Read Numbers array\r\n");
