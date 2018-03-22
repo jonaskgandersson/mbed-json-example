@@ -26,6 +26,7 @@ void jWriteTest();
 void testQuery(const char *pJson, const char *query);
 void runExamples();
 void articleExample();
+void jReadExample();
 
 int main()
 {
@@ -50,11 +51,11 @@ int main()
 	printf("\r\n");
 	printf(" +------------------------------------------------------------------+ \r\n");
 	printf(" |  %-64s| \r\n", "Read some json using jRead");
-	printf(" |  %-64s| \r\n", "Example from readme on Github");
+	printf(" |  %-64s| \r\n", "Basic example from readme on Github");
 	printf(" +------------------------------------------------------------------+ \r\n");
 	printf("\r\n");
 
-	articleExample();
+	jReadExample();
 
 	printf("\r\n");
 	printf(" +------------------------------------------------------------------+ \r\n");
@@ -64,6 +65,15 @@ int main()
 	printf("\r\n");
 
 	runExamples();
+
+	printf("\r\n");
+	printf(" +------------------------------------------------------------------+ \r\n");
+	printf(" |  %-64s| \r\n", "Read some json using jRead");
+	printf(" |  %-64s| \r\n", "Advanced example from readme on Github");
+	printf(" +------------------------------------------------------------------+ \r\n");
+	printf("\r\n");
+
+	articleExample();
 
 	printf("\r\n");
 	printf(" +------------------------------------------------------------------+ \r\n");
@@ -460,4 +470,48 @@ void articleExample()
 		}
 	}
 	i = 0;
+}
+
+void jReadExample()
+{
+
+	const char *pJson = 
+	"{\n"
+	"  \"astring\":\"This is a string\",\n"
+	"  \"anumber\":42,\n"
+	"  \"myarray\":[ \"zero\", 1, {\"description\":\"element 2\"}, null ],\n"
+	"  \"yesno\":true,\n"
+	"  \"PI\":\"3.1415926\",\n"
+	"  \"foo\":null\n"
+	"}\n";
+	
+	printf( "Example JSON to parse:\r\n%s\r\n", pJson);
+
+	testQuery( pJson, "{'astring'" );
+
+	testQuery( pJson, "{'myarray'" );
+
+	testQuery( pJson, "{'myarray' [2 {'description'" );
+
+	// Helper functions
+	char destString[100];
+	jRead_string( pJson, "{'astring'", destString, 100, NULL );
+
+	printf( "jRead_string, query: %s, result: %s\r\n", "{'astring'", destString );
+
+	int my_int = 0;
+	my_int = jRead_int( pJson, "{'myarray'[1", NULL );
+
+	printf( "jRead_int, query: %s, result: %d\r\n", "{'myarray'[1", my_int );
+
+	long my_long = 0;
+	my_long = jRead_long( pJson, "{'anumber'", NULL );
+
+	printf( "jRead_long, query: %s, result: %ld\r\n", "{'anumber'", my_long );
+
+	double my_double = 0.0;
+	my_double = jRead_double( pJson, "{'PI'", NULL );
+
+	printf( "jRead_double, query: %s, result: %.7f\r\n", "{'PI'", my_double );
+
 }
