@@ -3,6 +3,22 @@
 #include "jWrite.h"
 #include "jRead.h"
 
+// Color formated text and escapecharacters
+#define FRONT_COLOR_BLACK   "\x1b[38;5;16m"
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_WHITE   "\x1b[37;1m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+#define BACK_COLOR_BLUE   "\x1b[44m"
+#define BACK_COLOR_PEACH  "\x1b[48;5;208m"
+
+#define CLEAR_CONSOLE      "\033[2J\033[1;1H"
+
 // jWrite functions
 void jWriteTest();
 
@@ -13,6 +29,7 @@ void articleExample();
 
 int main()
 {
+	printf(CLEAR_CONSOLE);
 	printf(" +------------------------------------------------------------------+ \r\n");
 	printf(" |  %-64s| \r\n", "Mbed json example using jWrite and jRead");
 	printf(" |  Mbed-OS version: %d.%d.%-43d| \r\n", MBED_MAJOR_VERSION, MBED_MINOR_VERSION, MBED_PATCH_VERSION);
@@ -33,11 +50,20 @@ int main()
 	printf("\r\n");
 	printf(" +------------------------------------------------------------------+ \r\n");
 	printf(" |  %-64s| \r\n", "Read some json using jRead");
-	printf(" |  %-64s| \r\n", "Example in readme on Github");
+	printf(" |  %-64s| \r\n", "Example from readme on Github");
 	printf(" +------------------------------------------------------------------+ \r\n");
 	printf("\r\n");
 
 	articleExample();
+
+	printf("\r\n");
+	printf(" +------------------------------------------------------------------+ \r\n");
+	printf(" |  %-64s| \r\n", "Read some json using jRead");
+	printf(" |  %-64s| \r\n", "Some examples:");
+	printf(" +------------------------------------------------------------------+ \r\n");
+	printf("\r\n");
+
+	runExamples();
 
 	return 0;
 }
@@ -313,6 +339,8 @@ void runExamples()
 		"  \"yes\": true,\n"
 		"  \"no\":  false\n"
 		"}\n";
+
+	printf( "Example json: %s\r\n\n", exampleJson);
 
 	testQuery(exampleJson, "");
 	testQuery(exampleJson, "[1");
