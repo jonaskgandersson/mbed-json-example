@@ -422,7 +422,7 @@ void articleExample()
 		//Print result
 		for (i = 0; i < element.elements; i++) // loop for no. of elements in JSON
 		{
-			printf("Name: %s, Ident: %d\r\n", people[i].Name, people[i].Number);
+			printf("Name: %s, Ident: %ld\r\n", people[i].Name, people[i].Number);
 		}
 	}
 	i = 0;
